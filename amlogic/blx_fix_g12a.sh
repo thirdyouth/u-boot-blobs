@@ -22,13 +22,13 @@ else
 fi
 
 # blx_size: blx.bin size, zero_size: fill with zeros
-declare -i blx_size=`du -b $1 | awk '{print int($1)}'`
+declare -i blx_size=`wc -c < $1 | awk '{print int($1)}'`
 declare -i zero_size=$blx_bin_limit-$blx_size
 dd if=/dev/zero of=$2 bs=1 count=$zero_size
 cat $1 $2 > $3
 rm $2
 
-declare -i blx01_size=`du -b $4 | awk '{print int($1)}'`
+declare -i blx01_size=`wc -c < $4 | awk '{print int($1)}'`
 declare -i zero_size_01=$blx01_bin_limit-$blx01_size
 dd if=/dev/zero of=$2 bs=1 count=$zero_size_01
 cat $4 $2 > $5
